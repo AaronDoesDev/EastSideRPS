@@ -8,19 +8,13 @@ namespace ESG.RockPaperScissors
 {
 	public class GameController : MonoBehaviour
 	{
-		public Text playerHand;
-		public Text enemyHand;
+		[SerializeField] private Text _playerHand;
+		[SerializeField] private Text _enemyHand;
 
-		private Text _nameLabel;
-		private Text _moneyLabel;
+		[SerializeField] private Text _nameLabel;
+		[SerializeField] private Text _moneyLabel;
 
 		private Player _player;
-
-		void Awake()
-		{
-			_nameLabel = transform.Find ("Canvas/Name").GetComponent<Text>();
-			_moneyLabel = transform.Find ("Canvas/Money").GetComponent<Text>();
-		}
 
 		void Start()
 		{
@@ -74,8 +68,8 @@ namespace ESG.RockPaperScissors
 
 		public void OnGameUpdated(Hashtable gameUpdateData)
 		{
-			playerHand.text = DisplayResultAsText((UseableItem)gameUpdateData["resultPlayer"]);
-			enemyHand.text = DisplayResultAsText((UseableItem)gameUpdateData["resultOpponent"]);
+			_playerHand.text = DisplayResultAsText((UseableItem)gameUpdateData["resultPlayer"]);
+			_enemyHand.text = DisplayResultAsText((UseableItem)gameUpdateData["resultOpponent"]);
 
 			_player.ChangeCoinAmount((int)gameUpdateData["coinsAmountChange"]);
 		}

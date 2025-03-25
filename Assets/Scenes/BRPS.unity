@@ -563,8 +563,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cd3ac23a19441bf9636cf9b4794f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHand: {fileID: 176158464}
-  enemyHand: {fileID: 1098037998}
+  _playerHand: {fileID: 176158464}
+  _enemyHand: {fileID: 1098037998}
+  _nameLabel: {fileID: 777368575}
+  _moneyLabel: {fileID: 261528695}
 --- !u!1 &464451552
 GameObject:
   m_ObjectHideFlags: 0

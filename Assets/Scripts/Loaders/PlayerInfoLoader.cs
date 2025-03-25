@@ -2,18 +2,21 @@
 using System.Collections;
 using System;
 
-public class PlayerInfoLoader
+namespace ESG.RockPaperScissors
 {
-	public delegate void OnLoadedAction(Hashtable playerData);
-	public event OnLoadedAction OnLoaded;
-
-	public void load()
+	public class PlayerInfoLoader
 	{
-		Hashtable mockPlayerData = new Hashtable();
-		mockPlayerData["userId"] = 1;
-		mockPlayerData["name"] = "Player 1";
-		mockPlayerData["coins"] = 50;
+		public delegate void OnLoadedAction(Hashtable playerData);
+		public event OnLoadedAction OnLoaded;
 
-		OnLoaded(mockPlayerData);
+		public void Load()
+		{
+			Hashtable mockPlayerData = new Hashtable();
+			mockPlayerData["userId"] = 1;
+			mockPlayerData["name"] = "Player 1";
+			mockPlayerData["coins"] = 50;
+
+			OnLoaded(mockPlayerData);
+		}
 	}
 }

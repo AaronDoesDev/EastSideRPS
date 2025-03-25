@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum UseableItem
+namespace ESG.RockPaperScissors
 {
-	None,
-	Rock,
-	Paper,
-	Scissors
+	public enum UseableItem
+	{
+		None,
+		Rock,
+		Paper,
+		Scissors
+	}
 }

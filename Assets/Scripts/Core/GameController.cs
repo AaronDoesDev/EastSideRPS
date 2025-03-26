@@ -37,20 +37,20 @@ namespace ESG.RockPaperScissors
 			_player2Data = new Player(loadedPlayerData);
 		}
 
-		public void HandlePlayerInput(int item)
+		public void HandlePlayerInput(int signalIndex)
 		{
-			UseableItem playerChoice = UseableItem.None;
+			HandSignal playerChoice = HandSignal.None;
 
-			switch (item)
+			switch (signalIndex)
 			{
 				case 1:
-					playerChoice = UseableItem.Rock;
+					playerChoice = HandSignal.Rock;
 					break;
 				case 2:
-					playerChoice = UseableItem.Paper;
+					playerChoice = HandSignal.Paper;
 					break;
 				case 3:
-					playerChoice = UseableItem.Scissors;
+					playerChoice = HandSignal.Scissors;
 					break;
 			}
 
@@ -62,7 +62,7 @@ namespace ESG.RockPaperScissors
 			_gameInterface.UpdatePlayerData(_player1Data, _player2Data);
 		}
 
-		private void UpdateGame(UseableItem playerChoice)
+		private void UpdateGame(HandSignal playerChoice)
 		{
 			UpdateGameLoader updateGameLoader = new UpdateGameLoader(playerChoice);
 			updateGameLoader.OnLoaded += OnGameUpdated;
@@ -71,8 +71,8 @@ namespace ESG.RockPaperScissors
 
 		private void OnGameUpdated(Hashtable gameUpdateData)
 		{
-			_player1Data.lastUsedItem = (UseableItem)gameUpdateData["resultPlayer"];
-			_player2Data.lastUsedItem = (UseableItem)gameUpdateData["resultOpponent"];
+			_player1Data.lastUsedSignal = (HandSignal)gameUpdateData["resultPlayer"];
+			_player2Data.lastUsedSignal = (HandSignal)gameUpdateData["resultOpponent"];
 
 			int coinChange = (int)gameUpdateData["coinsAmountChange"];
 			_player1Data.ChangeCoinAmount(coinChange);

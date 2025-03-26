@@ -12,7 +12,7 @@ namespace ESG.RockPaperScissors
 
 	public class ResultAnalyzer
 	{
-		public static Result GetResultState(UseableItem playerHand, UseableItem enemyHand)
+		public static Result GetResultState(HandSignal playerHand, HandSignal enemyHand)
 		{
 			if (isStronger(playerHand, enemyHand))
 			{
@@ -28,39 +28,39 @@ namespace ESG.RockPaperScissors
 			}
 		}
 
-		private static bool isStronger (UseableItem firstHand, UseableItem secondHand)
+		private static bool isStronger (HandSignal firstHand, HandSignal secondHand)
 		{
 			switch (firstHand)
 			{
-				case UseableItem.Rock:
+				case HandSignal.Rock:
 				{
 					switch (secondHand)
 					{
-						case UseableItem.Scissors:
+						case HandSignal.Scissors:
 							return true;
-						case UseableItem.Paper:
+						case HandSignal.Paper:
 							return false;
 					}
 					break;
 				}
-				case UseableItem.Paper:
+				case HandSignal.Paper:
 				{
 					switch (secondHand)
 					{
-						case UseableItem.Rock:
+						case HandSignal.Rock:
 							return true;
-						case UseableItem.Scissors:
+						case HandSignal.Scissors:
 							return false;
 					}
 					break;
 				}
-				case UseableItem.Scissors:
+				case HandSignal.Scissors:
 				{
 					switch (secondHand)
 					{
-						case UseableItem.Paper:
+						case HandSignal.Paper:
 							return true;
-						case UseableItem.Rock:
+						case HandSignal.Rock:
 							return false;
 					}
 					break;

@@ -9,16 +9,16 @@ namespace ESG.RockPaperScissors
 		public delegate void OnLoadedAction(Hashtable gameUpdateData);
 		public event OnLoadedAction OnLoaded;
 
-		private UseableItem _choice;
+		private HandSignal _choice;
 
-		public UpdateGameLoader(UseableItem playerChoice)
+		public UpdateGameLoader(HandSignal playerChoice)
 		{
 			_choice = playerChoice;
 		}
 
 		public void Load()
 		{
-			UseableItem opponentHand = (UseableItem)Enum.GetValues(typeof(UseableItem)).GetValue(UnityEngine.Random.Range(1, 4));
+			HandSignal opponentHand = (HandSignal)Enum.GetValues(typeof(HandSignal)).GetValue(UnityEngine.Random.Range(1, 4));
 
 			Hashtable mockGameUpdate = new Hashtable();
 			mockGameUpdate["resultPlayer"] = _choice;
@@ -28,7 +28,7 @@ namespace ESG.RockPaperScissors
 			OnLoaded(mockGameUpdate);
 		}
 
-		private int GetCoinsAmount (UseableItem playerHand, UseableItem opponentHand)
+		private int GetCoinsAmount (HandSignal playerHand, HandSignal opponentHand)
 		{
 			Result drawResult = ResultAnalyzer.GetResultState(playerHand, opponentHand);
 

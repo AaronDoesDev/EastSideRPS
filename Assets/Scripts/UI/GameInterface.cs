@@ -15,10 +15,10 @@ namespace ESG.RockPaperScissors
         }
 
         public void UpdatePlayerData(Player player1Data, Player player2Data) {
-            _player1Panel.UpdateHandSignal(player1Data.lastUsedItem.ToString());
+            _player1Panel.UpdateHandSignal(player1Data.lastUsedSignal.ToString());
 			_player1Panel.UpdateMoney(player1Data.GetCoins());
 
-			_player2Panel.UpdateHandSignal(player2Data.lastUsedItem.ToString());
+			_player2Panel.UpdateHandSignal(player2Data.lastUsedSignal.ToString());
 			_player2Panel.UpdateMoney(player2Data.GetCoins());
         }
     }

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace ESG.RockPaperScissors
 {
-	public enum UseableItem
+	public enum HandSignal
 	{
 		None,
 		Rock,

@@ -8,35 +8,33 @@ namespace ESG.RockPaperScissors
 {
 	public class GameController : MonoBehaviour
 	{
-		[SerializeField] private Text _playerHand;
-		[SerializeField] private Text _enemyHand;
+		[SerializeField] private GameInterface _gameInterface;
 
-		[SerializeField] private Text _nameLabel;
-		[SerializeField] private Text _moneyLabel;
-
-		private Player _player;
+		private Player _player1Data;
+		private Player _player2Data;
 
 		void Start()
 		{
-			PlayerInfoLoader playerInfoLoader = new PlayerInfoLoader();
-			playerInfoLoader.OnLoaded += OnPlayerInfoLoaded;
-			playerInfoLoader.Load();
+			PlayerInfoLoader userInfoLoader = new PlayerInfoLoader();
+			userInfoLoader.OnLoaded += OnUserInfoLoaded;
+			userInfoLoader.LoadSimulatedUserData();
+
+			PlayerInfoLoader npcInfoLoader = new PlayerInfoLoader();
+			npcInfoLoader.OnLoaded += OnNPCInfoLoaded;
+			npcInfoLoader.LoadSimulatedNPCData();
+
+			_gameInterface.InitializePlayerData(_player1Data, _player2Data);
+			UpdateGameInterface();
 		}
 
-		void Update()
+		private void OnUserInfoLoaded(Hashtable playerData)
 		{
-			UpdateHud();
+			_player1Data = new Player(playerData);
 		}
 
-		public void OnPlayerInfoLoaded(Hashtable playerData)
+		private void OnNPCInfoLoaded(Hashtable playerData)
 		{
-			_player = new Player(playerData);
-		}
-
-		public void UpdateHud()
-		{
-			_nameLabel.text = "Name: " + _player.GetName();
-			_moneyLabel.text = "Money: $" + _player.GetCoins().ToString();
+			_player2Data = new Player(playerData);
 		}
 
 		public void HandlePlayerInput(int item)
@@ -59,6 +57,10 @@ namespace ESG.RockPaperScissors
 			UpdateGame(playerChoice);
 		}
 
+		private void UpdateGameInterface() {
+			_gameInterface.UpdatePlayerData(_player1Data, _player2Data);
+		}
+
 		private void UpdateGame(UseableItem playerChoice)
 		{
 			UpdateGameLoader updateGameLoader = new UpdateGameLoader(playerChoice);
@@ -66,27 +68,16 @@ namespace ESG.RockPaperScissors
 			updateGameLoader.Load();
 		}
 
-		public void OnGameUpdated(Hashtable gameUpdateData)
+		private void OnGameUpdated(Hashtable gameUpdateData)
 		{
-			_playerHand.text = DisplayResultAsText((UseableItem)gameUpdateData["resultPlayer"]);
-			_enemyHand.text = DisplayResultAsText((UseableItem)gameUpdateData["resultOpponent"]);
+			_player1Data.lastUsedItem = (UseableItem)gameUpdateData["resultPlayer"];
+			_player2Data.lastUsedItem = (UseableItem)gameUpdateData["resultOpponent"];
 
-			_player.ChangeCoinAmount((int)gameUpdateData["coinsAmountChange"]);
-		}
+			int coinChange = (int)gameUpdateData["coinsAmountChange"];
+			_player1Data.ChangeCoinAmount(coinChange);
+			_player2Data.ChangeCoinAmount(-coinChange);
 
-		private string DisplayResultAsText (UseableItem result)
-		{
-			switch (result)
-			{
-				case UseableItem.Rock:
-					return "Rock";
-				case UseableItem.Paper:
-					return "Paper";
-				case UseableItem.Scissors:
-					return "Scissors";
-			}
-
-			return "Nothing";
+			UpdateGameInterface();
 		}
 	}
 }

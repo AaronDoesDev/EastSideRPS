@@ -6,6 +6,8 @@ namespace ESG.RockPaperScissors
 {
 	public class Player
 	{
+		public UseableItem lastUsedItem;
+		
 		private int _userId;
 		private string _name;
 		private int _coins;

@@ -9,14 +9,24 @@ namespace ESG.RockPaperScissors
 		public delegate void OnLoadedAction(Hashtable playerData);
 		public event OnLoadedAction OnLoaded;
 
-		public void Load()
+		public void LoadSimulatedUserData()
 		{
-			Hashtable mockPlayerData = new Hashtable();
-			mockPlayerData["userId"] = 1;
-			mockPlayerData["name"] = "Player 1";
-			mockPlayerData["coins"] = 50;
+			Hashtable mockUserData = new Hashtable();
+			mockUserData["userId"] = 1;
+			mockUserData["name"] = "Human User";
+			mockUserData["coins"] = 50;
 
-			OnLoaded(mockPlayerData);
+			OnLoaded(mockUserData);
+		}
+
+		public void LoadSimulatedNPCData()
+		{
+			Hashtable mockNPCData = new Hashtable();
+			mockNPCData["userId"] = 2;
+			mockNPCData["name"] = "NPC Opponent";
+			mockNPCData["coins"] = 50;
+
+			OnLoaded(mockNPCData);
 		}
 	}
 }

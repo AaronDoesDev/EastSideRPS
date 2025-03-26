@@ -9,14 +9,14 @@ namespace ESG.RockPaperScissors
 		public UseableItem lastUsedItem;
 		
 		private int _userId;
-		private string _name;
+		private string _displayName;
 		private int _coins;
 
-		public Player(Hashtable playerData)
+		public Player(LoadablePlayerData loadablePlayerData)
 		{
-			_userId = (int)playerData["userId"];
-			_name = playerData["name"].ToString (); 
-			_coins = (int)playerData["coins"];
+			_userId = loadablePlayerData.uniqueId;
+			_displayName = loadablePlayerData.displayName; 
+			_coins = loadablePlayerData.coins;
 		}
 		
 		public int GetUserId()
@@ -24,9 +24,9 @@ namespace ESG.RockPaperScissors
 			return _userId;
 		}
 		
-		public string GetName()
+		public string GetDisplayName()
 		{
-			return _name;
+			return _displayName;
 		}
 
 		public int GetCoins()

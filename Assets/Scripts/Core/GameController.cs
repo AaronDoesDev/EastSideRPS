@@ -15,26 +15,26 @@ namespace ESG.RockPaperScissors
 
 		void Start()
 		{
-			PlayerInfoLoader userInfoLoader = new PlayerInfoLoader();
-			userInfoLoader.OnLoaded += OnUserInfoLoaded;
-			userInfoLoader.LoadSimulatedUserData();
+			PlayerDataLoadStrategy userDataLoader = new SimulateHumanLoadStrategy();
+			userDataLoader.OnLoaded += OnUserDataLoaded;
+			userDataLoader.LoadPlayerData(0);
 
-			PlayerInfoLoader npcInfoLoader = new PlayerInfoLoader();
-			npcInfoLoader.OnLoaded += OnNPCInfoLoaded;
-			npcInfoLoader.LoadSimulatedNPCData();
+			PlayerDataLoadStrategy npcDataLoader = new SimulateNPCLoadStrategy();
+			npcDataLoader.OnLoaded += OnNPCDataLoaded;
+			npcDataLoader.LoadPlayerData(1);
 
 			_gameInterface.InitializePlayerData(_player1Data, _player2Data);
 			UpdateGameInterface();
 		}
 
-		private void OnUserInfoLoaded(Hashtable playerData)
+		private void OnUserDataLoaded(LoadablePlayerData loadedPlayerData)
 		{
-			_player1Data = new Player(playerData);
+			_player1Data = new Player(loadedPlayerData);
 		}
 
-		private void OnNPCInfoLoaded(Hashtable playerData)
+		private void OnNPCDataLoaded(LoadablePlayerData loadedPlayerData)
 		{
-			_player2Data = new Player(playerData);
+			_player2Data = new Player(loadedPlayerData);
 		}
 
 		public void HandlePlayerInput(int item)
@@ -57,7 +57,8 @@ namespace ESG.RockPaperScissors
 			UpdateGame(playerChoice);
 		}
 
-		private void UpdateGameInterface() {
+		private void UpdateGameInterface()
+		{
 			_gameInterface.UpdatePlayerData(_player1Data, _player2Data);
 		}
 

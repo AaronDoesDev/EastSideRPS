@@ -10,8 +10,8 @@ namespace ESG.RockPaperScissors
 		[SerializeField] private PlayerInfoPanel _player2Panel;
 
         public void InitializePlayerData(Player player1Data, Player player2Data) {
-            _player1Panel.InitializePanel(player1Data.GetName(), player1Data.GetCoins());
-            _player2Panel.InitializePanel(player2Data.GetName(), player2Data.GetCoins());
+            _player1Panel.InitializePanel(player1Data.GetDisplayName(), player1Data.GetCoins());
+            _player2Panel.InitializePanel(player2Data.GetDisplayName(), player2Data.GetCoins());
         }
 
         public void UpdatePlayerData(Player player1Data, Player player2Data) {

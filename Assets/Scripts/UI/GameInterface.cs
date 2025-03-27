@@ -6,20 +6,32 @@ namespace ESG.RockPaperScissors
 {
     public class GameInterface : MonoBehaviour
     {
-        [SerializeField] private PlayerInfoPanel _player1Panel;
-		[SerializeField] private PlayerInfoPanel _player2Panel;
+        [SerializeField] private IDisplayablePlayerDataService _dataService;
+        
+        [SerializeField] private PlayerInfoPanel[] _playerPanels;
 
-        public void InitializePlayerData(Player player1Data, Player player2Data) {
-            _player1Panel.InitializePanel(player1Data.GetDisplayName(), player1Data.GetCoins());
-            _player2Panel.InitializePanel(player2Data.GetDisplayName(), player2Data.GetCoins());
+        protected void Awake() {
+            if(!TryGetComponent(out _dataService)) {
+                Debug.LogError("A component implementing IDisplayablePlayerDataService is required");
+            }
         }
 
-        public void UpdatePlayerData(Player player1Data, Player player2Data) {
-            _player1Panel.UpdateHandSignal(player1Data.lastUsedSignal.ToString());
-			_player1Panel.UpdateMoney(player1Data.GetCoins());
+        protected void Start() {
+            InitializePlayerData();
+            UpdatePlayerData();
+        }
 
-			_player2Panel.UpdateHandSignal(player2Data.lastUsedSignal.ToString());
-			_player2Panel.UpdateMoney(player2Data.GetCoins());
+        public void InitializePlayerData() {
+            for(int i = 0; i < _playerPanels.Length; i++) {
+                _playerPanels[i].InitializePanel(_dataService.GetDisplayName(i), _dataService.GetCoins(i));
+            }
+        }
+
+        public void UpdatePlayerData() {
+            for(int i = 0; i < _playerPanels.Length; i++) {
+                _playerPanels[i].UpdateHandSignal(_dataService.GetLastHandSignal(i).ToString());
+                _playerPanels[i].UpdateMoney(_dataService.GetCoins(i));
+            }
         }
     }
 }

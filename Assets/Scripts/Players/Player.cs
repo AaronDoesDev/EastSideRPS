@@ -14,6 +14,8 @@ namespace ESG.RockPaperScissors
 
 		public Player(LoadablePlayerData loadablePlayerData)
 		{
+			lastUsedSignal = HandSignal.None;
+
 			_userId = loadablePlayerData.uniqueId;
 			_displayName = loadablePlayerData.displayName; 
 			_coins = loadablePlayerData.coins;

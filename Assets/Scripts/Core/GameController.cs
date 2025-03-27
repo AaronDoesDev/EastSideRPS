@@ -8,34 +8,10 @@ namespace ESG.RockPaperScissors
 {
 	public class GameController : MonoBehaviour
 	{
+		// These are both concretions but they'll be refactored later
 		[SerializeField] private GameInterface _gameInterface;
-
-		private Player _player1Data;
-		private Player _player2Data;
-
-		void Start()
-		{
-			PlayerDataLoadStrategy userDataLoader = new SimulateHumanLoadStrategy();
-			userDataLoader.OnLoaded += OnUserDataLoaded;
-			userDataLoader.LoadPlayerData(0);
-
-			PlayerDataLoadStrategy npcDataLoader = new SimulateNPCLoadStrategy();
-			npcDataLoader.OnLoaded += OnNPCDataLoaded;
-			npcDataLoader.LoadPlayerData(1);
-
-			_gameInterface.InitializePlayerData(_player1Data, _player2Data);
-			UpdateGameInterface();
-		}
-
-		private void OnUserDataLoaded(LoadablePlayerData loadedPlayerData)
-		{
-			_player1Data = new Player(loadedPlayerData);
-		}
-
-		private void OnNPCDataLoaded(LoadablePlayerData loadedPlayerData)
-		{
-			_player2Data = new Player(loadedPlayerData);
-		}
+		[SerializeField] private PlayerDataService _playerDataService;
+		
 
 		public void HandlePlayerInput(int signalIndex)
 		{
@@ -57,11 +33,6 @@ namespace ESG.RockPaperScissors
 			UpdateGame(playerChoice);
 		}
 
-		private void UpdateGameInterface()
-		{
-			_gameInterface.UpdatePlayerData(_player1Data, _player2Data);
-		}
-
 		private void UpdateGame(HandSignal playerChoice)
 		{
 			UpdateGameLoader updateGameLoader = new UpdateGameLoader(playerChoice);
@@ -71,14 +42,8 @@ namespace ESG.RockPaperScissors
 
 		private void OnGameUpdated(Hashtable gameUpdateData)
 		{
-			_player1Data.lastUsedSignal = (HandSignal)gameUpdateData["resultPlayer"];
-			_player2Data.lastUsedSignal = (HandSignal)gameUpdateData["resultOpponent"];
-
-			int coinChange = (int)gameUpdateData["coinsAmountChange"];
-			_player1Data.ChangeCoinAmount(coinChange);
-			_player2Data.ChangeCoinAmount(-coinChange);
-
-			UpdateGameInterface();
+			_playerDataService.HandleGameUpdateData(gameUpdateData);
+			_gameInterface.UpdatePlayerData();
 		}
 	}
 }

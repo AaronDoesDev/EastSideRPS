@@ -18,7 +18,7 @@ namespace ESG.RockPaperScissors
 
 		public void Load()
 		{
-			HandSignal opponentHand = (HandSignal)Enum.GetValues(typeof(HandSignal)).GetValue(UnityEngine.Random.Range(1, 4));
+			HandSignal opponentHand = (HandSignal)Enum.GetValues(typeof(HandSignal)).GetValue(UnityEngine.Random.Range(0, 3));
 
 			Hashtable mockGameUpdate = new Hashtable();
 			mockGameUpdate["resultPlayer"] = _choice;

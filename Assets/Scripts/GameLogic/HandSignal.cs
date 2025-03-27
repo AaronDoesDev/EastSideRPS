@@ -5,9 +5,9 @@ namespace ESG.RockPaperScissors
 {
 	public enum HandSignal
 	{
-		None,
-		Rock,
-		Paper,
-		Scissors
+		None = -1,
+		Rock = 0,
+		Paper = 1,
+		Scissors = 2
 	}
 }

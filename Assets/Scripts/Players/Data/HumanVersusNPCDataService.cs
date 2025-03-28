@@ -7,8 +7,14 @@ namespace ESG.RockPaperScissors
     // The player data service does not implement an abstract class, but implements
     // two interfaces that allow it to cooperate with the UI and data services
     // without any concrete dependencies
-    public class PlayerDataService : MonoBehaviour, IDisplayablePlayerDataService, IResolutionHandler
+    public class HumanVersusNPCDataService : MonoBehaviour, IDisplayablePlayerDataService, IResolutionHandler
     {
+        private const int PLAYER_COUNT = 2;
+        private const int HUMAN_INDEX = 0;
+        private const int NPC_INDEX = 1;
+        private const int TEST_HUMAN_UNIQUE_ID = 0;
+        private const int TEST_NPC_UNIQUE_ID = 1;
+
         private Player[] _players;
 
         public string GetDisplayName(int playerIndex)
@@ -28,15 +34,15 @@ namespace ESG.RockPaperScissors
 
         protected void Awake()
         {
-            _players = new Player[2]; // hardcoded length for now
+            _players = new Player[PLAYER_COUNT];
 
             PlayerDataLoadStrategy userDataLoader = new SimulateHumanLoadStrategy();
 			userDataLoader.OnLoaded += OnUserDataLoaded;
-			userDataLoader.LoadPlayerData(0);
+			userDataLoader.LoadPlayerData(TEST_HUMAN_UNIQUE_ID);
 
 			PlayerDataLoadStrategy npcDataLoader = new SimulateNPCLoadStrategy();
 			npcDataLoader.OnLoaded += OnNPCDataLoaded;
-			npcDataLoader.LoadPlayerData(1);
+			npcDataLoader.LoadPlayerData(TEST_NPC_UNIQUE_ID);
         }
 
         public void HandleResolutionData(ResolutionData resolutionData)
@@ -51,12 +57,12 @@ namespace ESG.RockPaperScissors
 
         private void OnUserDataLoaded(LoadablePlayerData loadedPlayerData)
         {
-            _players[0] = new Player(loadedPlayerData);
+            _players[HUMAN_INDEX] = new Player(loadedPlayerData);
         }
 
 		private void OnNPCDataLoaded(LoadablePlayerData loadedPlayerData)
 		{
-			_players[1] = new Player(loadedPlayerData);
+			_players[NPC_INDEX] = new Player(loadedPlayerData);
 		}
     }
 }

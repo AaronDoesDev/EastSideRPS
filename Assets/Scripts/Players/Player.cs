@@ -9,9 +9,9 @@ namespace ESG.RockPaperScissors
 	{
 		public HandSignal lastUsedSignal;
 		
-		private int _userId;
-		private string _displayName;
-		private int _money;
+		protected int _userId;
+		protected string _displayName;
+		protected int _money;
 
 		public Player(LoadablePlayerData loadablePlayerData)
 		{

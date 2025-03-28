@@ -4,19 +4,25 @@ using UnityEngine;
 
 namespace ESG.RockPaperScissors
 {
+    // The player data service does not implement an abstract class, but implements
+    // two interfaces that allow it to cooperate with the UI and data services
+    // without any concrete dependencies
     public class PlayerDataService : MonoBehaviour, IDisplayablePlayerDataService, IResolutionHandler
     {
         private Player[] _players;
 
-        public string GetDisplayName(int playerIndex) {
+        public string GetDisplayName(int playerIndex)
+        {
             return _players[playerIndex].GetDisplayName();
         }
 
-        public int GetCoins(int playerIndex) {
+        public int GetCoins(int playerIndex)
+        {
             return _players[playerIndex].GetMoney();
         }
 
-        public HandSignal GetLastHandSignal(int playerIndex) {
+        public HandSignal GetLastHandSignal(int playerIndex)
+        {
             return _players[playerIndex].lastUsedSignal;
         }
 
@@ -33,7 +39,8 @@ namespace ESG.RockPaperScissors
 			npcDataLoader.LoadPlayerData(1);
         }
 
-        public void HandleResolutionData(ResolutionData resolutionData) {
+        public void HandleResolutionData(ResolutionData resolutionData)
+        {
             int playerCount = resolutionData.signals.Length;
             for(int i = 0; i < playerCount; i++)
             {

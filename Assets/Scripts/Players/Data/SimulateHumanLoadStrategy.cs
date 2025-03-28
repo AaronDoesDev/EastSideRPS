@@ -4,6 +4,8 @@ using System;
 
 namespace ESG.RockPaperScissors
 {
+	// An implementation of PlayerDataLoadStrategy that simulates the load of a human player
+	// by hardcoding some values onto the LoadPlayerData instance.
 	public class SimulateHumanLoadStrategy : PlayerDataLoadStrategy
 	{
 		public override void LoadPlayerData(int uniqueId)

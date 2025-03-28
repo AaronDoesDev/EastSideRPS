@@ -4,6 +4,8 @@ using System;
 
 namespace ESG.RockPaperScissors
 {
+	// An implementation of PlayerDataLoadStrategy that simulates the load of an NPC player
+	// by hardcoding some values onto the LoadPlayerData instance.
 	public class SimulateNPCLoadStrategy : PlayerDataLoadStrategy
 	{
 		public override void LoadPlayerData(int uniqueId)

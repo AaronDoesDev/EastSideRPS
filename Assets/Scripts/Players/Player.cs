@@ -4,6 +4,7 @@ using System;
 
 namespace ESG.RockPaperScissors
 {
+	// A data class containing all information pertinent to a player's current state
 	public class Player
 	{
 		public HandSignal lastUsedSignal;

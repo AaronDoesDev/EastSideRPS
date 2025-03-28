@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ESG.RockPaperScissors
 {
-    public struct LoadablePlayerData
+    public class LoadablePlayerData
     {
         public int uniqueId;
         public string displayName;

@@ -10,11 +10,9 @@ namespace ESG.RockPaperScissors
         [SerializeField] private Text _nameText;
         [SerializeField] private Text _moneyText;
         [SerializeField] private Text _handSignalText;
-
-        public void InitializePanel(string playerName, int coins) {
-            _nameText.text = playerName;
-            
-            UpdateMoney(coins);
+        
+        public void UpdateDisplayName(string displayName) {
+            _nameText.text = displayName;
         }
 
         public void UpdateMoney(int coins) {

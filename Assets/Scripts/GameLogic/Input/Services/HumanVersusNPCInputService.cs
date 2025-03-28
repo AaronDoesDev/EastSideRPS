@@ -10,8 +10,7 @@ namespace ESG.RockPaperScissors
         private const int NPC_INDEX = 0;
 
         private IResolutionService _resolutionService;
-        // A concretion I will refactor soon
-        private RPSInterfaceService _interfaceService;
+        private IUpdatableInterface _interfaceService;
         
 
         protected void Awake()
@@ -21,7 +20,7 @@ namespace ESG.RockPaperScissors
             }
 
             if(!TryGetComponent(out _interfaceService)) {
-                Debug.LogError("HumanVersusNPCInputService requires an RPSInterfaceService component");
+                Debug.LogError("HumanVersusNPCInputService requires a component implementing IUpdateableInterface");
             }
 
             CreateInputStrategies(HUMAN_PLAYER_COUNT, NPC_PLAYER_COUNT);
@@ -64,7 +63,7 @@ namespace ESG.RockPaperScissors
             };
 
             _resolutionService.ResolveWinner(allPlayerSignals);
-            _interfaceService.UpdatePlayerData();
+            _interfaceService.UpdateInterface(InterfaceUpdateFlags.Money | InterfaceUpdateFlags.HandSignal);
 
             BeginListening();
         }

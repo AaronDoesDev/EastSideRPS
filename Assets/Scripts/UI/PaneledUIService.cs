@@ -7,9 +7,9 @@ namespace ESG.RockPaperScissors
     // input services) and receive update requests from other services.
     public class PaneledUIService : MonoBehaviour, IInputButtonProvider, IUpdatableUI
     {
-        // An abstraction allowing the UI service to request the aspects of the data
+        // An abstraction allowing the UI service to request the aspects of the player data
         // service that are relevant to the UI.
-        private IDisplayablePlayerDataService _dataService;
+        private PlayerDataService _dataService;
 
         // As serialized fields, these references are meant to be set in the Inspector.
         [SerializeField] private PlayerInfoPanel[] _playerPanels;

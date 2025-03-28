@@ -13,7 +13,7 @@ namespace ESG.RockPaperScissors
 			LoadablePlayerData mockUserData = new LoadablePlayerData();
 			mockUserData.uniqueId = uniqueId;
 			mockUserData.displayName = "NPC Opponent";
-			mockUserData.coins = 50;
+			mockUserData.coins = 0;
 
 			InvokeLoadedEvent(mockUserData);
 		}

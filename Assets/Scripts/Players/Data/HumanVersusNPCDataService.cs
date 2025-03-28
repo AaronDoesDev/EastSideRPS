@@ -15,6 +15,9 @@ namespace ESG.RockPaperScissors
         private const int TEST_HUMAN_UNIQUE_ID = 0;
         private const int TEST_NPC_UNIQUE_ID = 1;
 
+        // An Inspector-set reference to the game config ScriptableObject
+        [SerializeField] GameConfig _gameConfig;
+
         protected void Awake()
         {
             _players = new Player[PLAYER_COUNT];
@@ -41,11 +44,13 @@ namespace ESG.RockPaperScissors
         private void OnUserDataLoaded(LoadablePlayerData loadedPlayerData)
         {
             _players[HUMAN_INDEX] = new Player(loadedPlayerData);
+            _players[HUMAN_INDEX].AdjustMoney(_gameConfig.StartingMoney);
         }
 
 		private void OnNPCDataLoaded(LoadablePlayerData loadedPlayerData)
 		{
 			_players[NPC_INDEX] = new Player(loadedPlayerData);
+            _players[NPC_INDEX].AdjustMoney(_gameConfig.StartingMoney);
 		}
     }
 }

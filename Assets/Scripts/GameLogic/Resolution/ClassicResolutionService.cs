@@ -11,6 +11,9 @@ namespace ESG.RockPaperScissors
     {
         private const int REQUIRED_COUNT = 2;
 
+        // An Inspector-set reference to the game config ScriptableObject
+        [SerializeField] GameConfig _gameConfig;
+
         // An abstraction allowing the resolution service to pass the outcome on for purposes like
         // processing and display.
         protected IResolutionHandler _resolutionHandler;
@@ -68,7 +71,7 @@ namespace ESG.RockPaperScissors
         protected virtual void RecordResolution(HandSignal[] signals, int winnerIndex)
         {
             ResolutionData resolutionData;
-            int winValue = 10; // a magic number that I'll source properly soon
+            int winValue = _gameConfig.BetAmount;
 
             resolutionData = new ResolutionData();
             resolutionData.signals = signals;

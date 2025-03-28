@@ -8,11 +8,10 @@ namespace ESG.RockPaperScissors
     {
         private const int REQUIRED_COUNT = 2;
 
-        // A concretion I will refactor soon
-        private PlayerDataService _dataService;
+        private IResolutionHandler _resolutionHandler;
 
         protected void Awake() {
-            if(!TryGetComponent(out _dataService)) {
+            if(!TryGetComponent(out _resolutionHandler)) {
                 Debug.LogError("ClassicResolutionService requires a PlayerDataService component");
             }
         }
@@ -70,7 +69,7 @@ namespace ESG.RockPaperScissors
                 }
             }
 
-			_dataService.HandleResolutionData(resolutionData);
+			_resolutionHandler.HandleResolutionData(resolutionData);
         }
     }
 }

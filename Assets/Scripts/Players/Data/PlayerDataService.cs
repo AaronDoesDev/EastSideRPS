@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ESG.RockPaperScissors
 {
-    public class PlayerDataService : MonoBehaviour, IDisplayablePlayerDataService
+    public class PlayerDataService : MonoBehaviour, IDisplayablePlayerDataService, IResolutionHandler
     {
         private Player[] _players;
 

@@ -13,7 +13,7 @@ namespace ESG.RockPaperScissors
         }
 
         public int GetCoins(int playerIndex) {
-            return _players[playerIndex].GetCoins();
+            return _players[playerIndex].GetMoney();
         }
 
         public HandSignal GetLastHandSignal(int playerIndex) {
@@ -33,13 +33,13 @@ namespace ESG.RockPaperScissors
 			npcDataLoader.LoadPlayerData(1);
         }
 
-        public void HandleGameUpdateData(Hashtable gameUpdateData) {
-            _players[0].lastUsedSignal = (HandSignal)gameUpdateData["resultPlayer"];
-			_players[1].lastUsedSignal = (HandSignal)gameUpdateData["resultOpponent"];
-
-			int coinChange = (int)gameUpdateData["coinsAmountChange"];
-			_players[0].ChangeCoinAmount(coinChange);
-			_players[1].ChangeCoinAmount(-coinChange);
+        public void HandleResolutionData(ResolutionData resolutionData) {
+            int playerCount = resolutionData.signals.Length;
+            for(int i = 0; i < playerCount; i++)
+            {
+                _players[i].lastUsedSignal = resolutionData.signals[i];
+                _players[i].AdjustMoney(resolutionData.moneyAdjustments[i]);
+            }
         }
 
         private void OnUserDataLoaded(LoadablePlayerData loadedPlayerData)

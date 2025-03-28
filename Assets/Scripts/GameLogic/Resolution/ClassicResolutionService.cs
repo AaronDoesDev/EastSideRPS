@@ -51,25 +51,26 @@ namespace ESG.RockPaperScissors
         }
 
         protected void RecordResolution(HandSignal[] signals, int winnerIndex) {
-            Hashtable gameUpdateData;
+            ResolutionData resolutionData;
+            int winValue = 10; // a magic number that I'll source properly soon
+            int playerCount = signals.Length;
 
-            gameUpdateData = new Hashtable();
+            resolutionData = new ResolutionData();
+            resolutionData.signals = signals;
+            resolutionData.moneyAdjustments = new int[playerCount];
 
-            gameUpdateData["resultPlayer"] = signals[0];
-            gameUpdateData["resultOpponent"] = signals[1];
-
-            int coinChange = 0;
-            if(winnerIndex == 0)
-            {
-                coinChange = 10;
+            for(int i = 0; i < playerCount; i++) {
+                if(winnerIndex == -1)
+                {
+                    resolutionData.moneyAdjustments[i] = 0;
+                }
+                else
+                {
+                    resolutionData.moneyAdjustments[i] = winnerIndex == i ? winValue : -winValue;
+                }
             }
-            else if(winnerIndex == 1)
-            {
-                coinChange = -10;
-            }
-            gameUpdateData["coinsAmountChange"] = coinChange;
 
-			_dataService.HandleGameUpdateData(gameUpdateData);
+			_dataService.HandleResolutionData(resolutionData);
         }
     }
 }

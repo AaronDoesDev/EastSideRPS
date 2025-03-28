@@ -10,7 +10,7 @@ namespace ESG.RockPaperScissors
 		
 		private int _userId;
 		private string _displayName;
-		private int _coins;
+		private int _money;
 
 		public Player(LoadablePlayerData loadablePlayerData)
 		{
@@ -18,7 +18,7 @@ namespace ESG.RockPaperScissors
 
 			_userId = loadablePlayerData.uniqueId;
 			_displayName = loadablePlayerData.displayName; 
-			_coins = loadablePlayerData.coins;
+			_money = loadablePlayerData.coins;
 		}
 		
 		public int GetUserId()
@@ -31,14 +31,14 @@ namespace ESG.RockPaperScissors
 			return _displayName;
 		}
 
-		public int GetCoins()
+		public int GetMoney()
 		{
-			return _coins;
+			return _money;
 		}
 
-		public void ChangeCoinAmount(int amount)
+		public void AdjustMoney(int amount)
 		{
-			_coins += amount;
+			_money += amount;
 		}
 	}
 }

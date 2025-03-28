@@ -15,8 +15,8 @@ namespace ESG.RockPaperScissors
 
         // An abstraction allowing the input service to pass all player inputs into any resolution service
         private IResolutionService _resolutionService;
-        // An abstraction allowing the input service to tell any interface service to update with new information
-        private IUpdatableInterface _interfaceService;
+        // An abstraction allowing the input service to tell any UI service to update with new information
+        private IUpdatableUI _uiService;
         
 
         protected void Awake()
@@ -26,9 +26,9 @@ namespace ESG.RockPaperScissors
                 Debug.LogError("HumanVersusNPCInputService requires a component implementing IResolutionService");
             }
 
-            if(!TryGetComponent(out _interfaceService))
+            if(!TryGetComponent(out _uiService))
             {
-                Debug.LogError("HumanVersusNPCInputService requires a component implementing IUpdateableInterface");
+                Debug.LogError("HumanVersusNPCInputService requires a component implementing IUpdateableUI");
             }
 
             CreateInputStrategies(HUMAN_PLAYER_COUNT, NPC_PLAYER_COUNT);
@@ -83,8 +83,8 @@ namespace ESG.RockPaperScissors
             // Reach out to the provided resolution service to determine the winner of this round and adjust any
             // money values accordingly.
             _resolutionService.ResolveWinner(allPlayerSignals);
-            // Reach out to the provided interface service to update it with the new money and hand signal values.
-            _interfaceService.UpdateInterface(InterfaceUpdateFlags.Money | InterfaceUpdateFlags.HandSignal);
+            // Reach out to the provided UI service to update it with the new money and hand signal values.
+            _uiService.UpdateUI(UIUpdateFlags.Money | UIUpdateFlags.HandSignal);
 
             BeginListening();
         }

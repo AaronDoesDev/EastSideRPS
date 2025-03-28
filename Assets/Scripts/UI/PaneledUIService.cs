@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 namespace ESG.RockPaperScissors
 {
-    // An interface service that implements interfaces allowing it to provide buttons (probably to
+    // A UI service that implements interfaces allowing it to provide buttons (probably to
     // input services) and receive update requests from other services.
-    public class RPSInterfaceService : MonoBehaviour, IInputButtonProvider, IUpdatableInterface
+    public class PaneledUIService : MonoBehaviour, IInputButtonProvider, IUpdatableUI
     {
-        // An abstraction allowing the interface service to request the aspects of the data
+        // An abstraction allowing the UI service to request the aspects of the data
         // service that are relevant to the UI.
         private IDisplayablePlayerDataService _dataService;
 
@@ -26,26 +26,26 @@ namespace ESG.RockPaperScissors
 
         protected void Start()
         {
-            UpdateInterface(InterfaceUpdateFlags.All);
+            UpdateUI(UIUpdateFlags.All);
         }
 
         // This flag-based system is admittedly a bit overengineered for a feature like this.
         // Still, I think bitwise enums are useful and wanted to squeeze in a demo.
-        public void UpdateInterface(InterfaceUpdateFlags flags)
+        public void UpdateUI(UIUpdateFlags flags)
         {
             for(int i = 0; i < _playerPanels.Length; i++)
             {
-                if((flags & InterfaceUpdateFlags.DisplayName) != 0 || (flags & InterfaceUpdateFlags.All) != 0)
+                if((flags & UIUpdateFlags.DisplayName) != 0 || (flags & UIUpdateFlags.All) != 0)
                 {
                     _playerPanels[i].UpdateDisplayName(_dataService.GetDisplayName(i));
                 }
 
-                if((flags & InterfaceUpdateFlags.Money) != 0 || (flags & InterfaceUpdateFlags.All) != 0)
+                if((flags & UIUpdateFlags.Money) != 0 || (flags & UIUpdateFlags.All) != 0)
                 {
                     _playerPanels[i].UpdateMoney(_dataService.GetCoins(i));
                 }
 
-                if((flags & InterfaceUpdateFlags.HandSignal) != 0 || (flags & InterfaceUpdateFlags.All) != 0)
+                if((flags & UIUpdateFlags.HandSignal) != 0 || (flags & UIUpdateFlags.All) != 0)
                 {
                     _playerPanels[i].UpdateHandSignal(_dataService.GetLastHandSignal(i).ToString());
                 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace ESG.RockPaperScissors
 {
-    // A bitwise enum that allows UpdateInterface implementations to update only the
+    // A bitwise enum that allows UpdateUI implementations to update only the
     // indicated UI elements. Custom combinations can be put together using the bar operator (|).
-    public enum InterfaceUpdateFlags {
+    public enum UIUpdateFlags {
         None = 0,
         DisplayName = 1,
         Money = 2,
@@ -16,8 +16,8 @@ namespace ESG.RockPaperScissors
 
     // Requires method(s) that allow a class to update the specified UI elements
     // when another service makes changes to their associated data.
-    public interface IUpdatableInterface
+    public interface IUpdatableUI
     {
-        public void UpdateInterface(InterfaceUpdateFlags flags);
+        public void UpdateUI(UIUpdateFlags flags);
     }
 }

@@ -211,9 +211,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 452960589}
-  - component: {fileID: 452960590}
   - component: {fileID: 452960591}
   - component: {fileID: 452960592}
+  - component: {fileID: 452960593}
+  - component: {fileID: 452960594}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -237,20 +238,6 @@ Transform:
   - {fileID: 2069232889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &452960590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452960588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0cd3ac23a19441bf9636cf9b4794f9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameInterface: {fileID: 452960592}
-  _playerDataService: {fileID: 452960591}
 --- !u!114 &452960591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +265,34 @@ MonoBehaviour:
   _playerPanels:
   - {fileID: 1481576302}
   - {fileID: 1331395157}
+  _inputButtonLists:
+  - RockButton: {fileID: 813087661}
+    PaperButton: {fileID: 1799944008}
+    ScissorsButton: {fileID: 916554267}
+--- !u!114 &452960593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452960588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff414bde0a3c2bf449757f715c46baaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &452960594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452960588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6428c33b1dd750d40946393ff9d844c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &464451552
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,19 +777,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 813087662}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 452960590}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: HandlePlayerInput
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &813087662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,19 +898,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 916554268}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 452960590}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: HandlePlayerInput
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &916554268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,19 +1207,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1799944009}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 452960590}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: HandlePlayerInput
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1799944009
 MonoBehaviour:
   m_ObjectHideFlags: 0

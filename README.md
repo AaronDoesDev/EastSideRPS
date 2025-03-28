@@ -1,2 +1,2 @@
-# EastSideRPS
-Rock Paper Scissors tech test project for East Side Games
+# Demo Project
+For privacy's sake, please refer to the provided pdf for notes on my implementation.

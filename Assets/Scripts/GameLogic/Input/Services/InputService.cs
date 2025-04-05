@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace ESG.RockPaperScissors
@@ -14,16 +15,9 @@ namespace ESG.RockPaperScissors
         protected HandSignal[] _listenedInput;
         protected HandSignal[] _respondedInput;
 
-        // Counts that track how many more inputs to expect from each strategy type.
-        protected int _remainingListenCount;
-        protected int _remainingResponseCount;
-
         // This method resets the service state, priming it for the next complete set of inputs.
         public virtual void BeginListening()
         {
-            _remainingListenCount = _listeningInputStrategies.Length;
-            _remainingResponseCount = _respondingInputStrategies.Length;
-
             for(int i = 0; i < _listenedInput.Length; i++)
             {
                 _listenedInput[i] = HandSignal.None;
@@ -39,13 +33,8 @@ namespace ESG.RockPaperScissors
 
         protected void CheckListenedInputs()
         {
-            if(_remainingListenCount < 0)
-            {
-                Debug.LogWarning("More listened inputs received than expected - investigate InputService implementation");
-            }
-
             // Once all listened input is received (if any), input can be requested from all of the 'responding' input strategies.
-            if(_remainingListenCount == 0)
+            if(!_listenedInput.Contains(HandSignal.None))
             {
                 PromptRespondingInputs();
             }
@@ -53,14 +42,9 @@ namespace ESG.RockPaperScissors
 
         protected void CheckRespondedInputs()
         {
-            if(_remainingResponseCount < 0)
-            {
-                Debug.LogWarning("More responded inputs received than expected - investigate InputService implementation");
-            }
-
             // Once all responding inputs have arrived (if any), the HandleAllInputReady method is invoked.
             // This method must be defined in another non-abstract class implementing this one.
-            if(_remainingResponseCount == 0)
+            if(!_respondedInput.Contains(HandSignal.None))
             {
                 HandleAllInputReady();
             }
@@ -71,8 +55,6 @@ namespace ESG.RockPaperScissors
         protected virtual void HandleListenedInput(int index, HandSignal signal)
         {
             _listenedInput[index] = signal;
-            
-            _remainingListenCount--;
             CheckListenedInputs();
         }
 
@@ -90,8 +72,6 @@ namespace ESG.RockPaperScissors
         protected virtual void HandleRespondedInput(int index, HandSignal signal)
         {
             _respondedInput[index] = signal;
-            
-            _remainingResponseCount--;
             CheckRespondedInputs();
         }
 
